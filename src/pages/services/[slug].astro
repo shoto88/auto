@@ -27,14 +27,18 @@ const { service } = Astro.props;
   <div class="table-scroll">
     <table>
       <tbody>
+        <tr><th>提供元</th><td>{service.company}</td></tr>
         <tr><th>カテゴリ</th><td>{service.category}</td></tr>
         <tr><th>料金目安</th><td>{service.priceNote}</td></tr>
         <tr><th>向いている企業</th><td>{service.target}</td></tr>
         <tr><th>主な機能・内容</th><td>{service.features.join(' / ')}</td></tr>
-        <tr><th>公式サイト</th><td><a href={service.url} rel="nofollow noopener" target="_blank">{service.url}</a></td></tr>
+        <tr><th>公式サイト</th><td><a href={service.url} rel="noopener" target="_blank">{service.url}</a></td></tr>
       </tbody>
     </table>
   </div>
+  <p class="notice">
+    掲載情報は公開情報に基づく{service.checkedAt}時点のものです。料金・内容は変更される場合があるため、最新情報は公式サイトでご確認ください。
+  </p>
 
   <h2>検討時のポイント</h2>
   <div class="card">
