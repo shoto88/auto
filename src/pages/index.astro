@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import agencies from '../data/agencies.json';
+
+const platforms = [...new Set(agencies.flatMap((a) => a.platforms))];
+---
+<Base
+  title="ショトログ|ショート動画運用代行の比較データベース"
+  description="TikTok・YouTubeショート・Instagramリールの運用代行会社を料金・対応範囲・最低契約期間で横断比較。ショート動画特化の比較データベースです。"
+>
+  <section class="card">
+    <h1>ショート動画運用代行を、料金と条件で比較する</h1>
+    <p>
+      TikTok・YouTubeショート・Instagramリールの運用代行会社を、<strong>月額料金・対応範囲・最低契約期間</strong>で横断比較できるデータベースです。
+      「相場が分からない」「何を任せられるのか分からない」を解消します。
+    </p>
+    <p><a class="btn" href="/guide/">まずは料金相場を知る →</a></p>
+  </section>
+
+  <h2>掲載企業一覧</h2>
+  <p>
+    プラットフォームで絞り込み:
+    <select id="platform-filter">
+      <option value="">すべて</option>
+      {platforms.map((p) => <option value={p}>{p}</option>)}
+    </select>
+  </p>
+
+  <div class="table-scroll">
+    <table id="agency-table">
+      <thead>
+        <tr>
+          <th>会社名</th>
+          <th>対応SNS</th>
+          <th>月額目安</th>
+          <th>最低契約</th>
+          <th>所在地</th>
+          <th>強み</th>
+        </tr>
+      </thead>
+      <tbody>
+        {agencies.map((a) => (
+          <tr data-platforms={a.platforms.join(',')}>
+            <td><a href={`/agencies/${a.slug}/`}>{a.name}</a></td>
+            <td>{a.platforms.map((p) => <span class="tag">{p}</span>)}</td>
+            <td>{a.priceMin}〜{a.priceMax}万円</td>
+            <td>{a.minContractMonths}ヶ月〜</td>
+            <td>{a.location}</td>
+            <td>{a.strengths}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>ショトログとは</h2>
+  <div class="card">
+    <p>
+      ショトログは、ショート動画(縦型動画)の運用代行・制作会社に特化した比較データベースです。
+      公開情報とヒアリングをもとに、料金レンジ・対応範囲・契約条件を統一フォーマットで整理しています。
+      掲載をご希望の企業様は<a href="/about/">運営者情報</a>のページからご連絡ください。
+    </p>
+  </div>
+
+  <script>
+    const filter = document.getElementById('platform-filter') as HTMLSelectElement;
+    const rows = document.querySelectorAll<HTMLTableRowElement>('#agency-table tbody tr');
+    filter?.addEventListener('change', () => {
+      const v = filter.value;
+      rows.forEach((row) => {
+        const list = (row.dataset.platforms ?? '').split(',');
+        row.style.display = !v || list.includes(v) ? '' : 'none';
+      });
+    });
+  </script>
+</Base>

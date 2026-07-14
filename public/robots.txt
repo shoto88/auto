@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shotolog.example.com/sitemap-index.xml

@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import agencies from '../../data/agencies.json';
+
+export function getStaticPaths() {
+  return agencies.map((agency) => ({
+    params: { slug: agency.slug },
+    props: { agency },
+  }));
+}
+
+const { agency } = Astro.props;
+---
+<Base
+  title={`${agency.name}の料金・サービス内容|ショトログ`}
+  description={`${agency.name}のショート動画運用代行サービスを紹介。月額${agency.priceMin}〜${agency.priceMax}万円、最低契約期間${agency.minContractMonths}ヶ月から。`}
+>
+  <p><a href="/">← 一覧に戻る</a></p>
+  <h1>{agency.name}</h1>
+  <p>{agency.platforms.map((p) => <span class="tag">{p}</span>)}</p>
+
+  <div class="card">
+    <p>{agency.description}</p>
+  </div>
+
+  <h2>基本情報</h2>
+  <div class="table-scroll">
+    <table>
+      <tbody>
+        <tr><th>月額料金の目安</th><td>{agency.priceMin}万円 〜 {agency.priceMax}万円</td></tr>
+        <tr><th>最低契約期間</th><td>{agency.minContractMonths}ヶ月〜</td></tr>
+        <tr><th>対応プラットフォーム</th><td>{agency.platforms.join(' / ')}</td></tr>
+        <tr><th>対応範囲</th><td>{agency.services.join(' / ')}</td></tr>
+        <tr><th>所在地</th><td>{agency.location}</td></tr>
+        <tr><th>強み</th><td>{agency.strengths}</td></tr>
+        <tr><th>公式サイト</th><td><a href={agency.url} rel="nofollow noopener" target="_blank">{agency.url}</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>この会社が向いているケース</h2>
+  <div class="card">
+    <p>
+      月額{agency.priceMin}万円台から依頼でき、対応範囲は「{agency.services.join('・')}」です。
+      依頼前に、自社で内製する部分と任せる部分の切り分けを整理しておくと、見積もり比較がしやすくなります。
+      相場観は<a href="/guide/">料金相場ガイド</a>も参考にしてください。
+    </p>
+  </div>
+</Base>
