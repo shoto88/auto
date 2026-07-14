@@ -1,76 +1,75 @@
 ---
 import Base from '../layouts/Base.astro';
-import agencies from '../data/agencies.json';
-
-const platforms = [...new Set(agencies.flatMap((a) => a.platforms))];
 ---
 <Base
-  title="ショトログ|ショート動画運用代行の比較データベース"
-  description="TikTok・YouTubeショート・Instagramリールの運用代行会社を料金・対応範囲・最低契約期間で横断比較。ショート動画特化の比較データベースです。"
+  title="カスハラ対策ナビ|2026年10月義務化対応の総合情報・比較サイト"
+  description="2026年10月1日施行の改正労働施策総合推進法で全企業に義務化されるカスタマーハラスメント対策。基本方針のひな形、対策サービスの比較、業種別の対応要点をまとめた総合情報サイトです。"
 >
+  <div class="countdown" id="countdown">
+    カスハラ対策の義務化(2026年10月1日施行)まで <span id="days-left">…</span>
+  </div>
+
   <section class="card">
-    <h1>ショート動画運用代行を、料金と条件で比較する</h1>
+    <h1>カスハラ対策、御社の準備は終わっていますか?</h1>
     <p>
-      TikTok・YouTubeショート・Instagramリールの運用代行会社を、<strong>月額料金・対応範囲・最低契約期間</strong>で横断比較できるデータベースです。
-      「相場が分からない」「何を任せられるのか分からない」を解消します。
+      改正労働施策総合推進法により、<strong>2026年10月1日から、従業員を雇用するすべての事業主</strong>にカスタマーハラスメント対策(雇用管理上の措置)が義務付けられます。中小企業も例外ではありません。
     </p>
-    <p><a class="btn" href="/guide/">まずは料金相場を知る →</a></p>
+    <p>
+      カスハラ対策ナビは、<strong>「何をすればいいのか」を最短で把握し、そのまま使えるひな形と、外部サービスの比較</strong>までを1か所にまとめた情報サイトです。
+    </p>
+    <p>
+      <a class="btn" href="/guide/">まず義務の中身を知る →</a>
+      <a class="btn secondary" href="/templates/">ひな形をすぐ使う →</a>
+    </p>
   </section>
 
-  <h2>掲載企業一覧</h2>
-  <p>
-    プラットフォームで絞り込み:
-    <select id="platform-filter">
-      <option value="">すべて</option>
-      {platforms.map((p) => <option value={p}>{p}</option>)}
-    </select>
-  </p>
-
+  <h2>義務化対応の4ステップ</h2>
   <div class="table-scroll">
-    <table id="agency-table">
+    <table>
       <thead>
-        <tr>
-          <th>会社名</th>
-          <th>対応SNS</th>
-          <th>月額目安</th>
-          <th>最低契約</th>
-          <th>所在地</th>
-          <th>強み</th>
-        </tr>
+        <tr><th>ステップ</th><th>やること</th><th>使えるリソース</th></tr>
       </thead>
       <tbody>
-        {agencies.map((a) => (
-          <tr data-platforms={a.platforms.join(',')}>
-            <td><a href={`/agencies/${a.slug}/`}>{a.name}</a></td>
-            <td>{a.platforms.map((p) => <span class="tag">{p}</span>)}</td>
-            <td>{a.priceMin}〜{a.priceMax}万円</td>
-            <td>{a.minContractMonths}ヶ月〜</td>
-            <td>{a.location}</td>
-            <td>{a.strengths}</td>
-          </tr>
-        ))}
+        <tr>
+          <td>1. 方針の明確化・周知</td>
+          <td>カスハラに組織として毅然と対応する方針を定め、従業員と顧客に周知する</td>
+          <td><a href="/templates/">基本方針の文例・店頭掲示文</a></td>
+        </tr>
+        <tr>
+          <td>2. 相談体制の整備</td>
+          <td>従業員が相談できる窓口を決め、周知する(外部委託も可)</td>
+          <td><a href="/services/">外部相談窓口サービス比較</a></td>
+        </tr>
+        <tr>
+          <td>3. 発生時の対応ルール</td>
+          <td>事実確認・従業員の保護・行為者への対応の手順を決めておく</td>
+          <td><a href="/templates/">対応フローのひな形</a></td>
+        </tr>
+        <tr>
+          <td>4. 教育・再発防止</td>
+          <td>従業員研修の実施、対応記録の保存、マニュアルの見直し</td>
+          <td><a href="/services/">研修・ツールの比較</a></td>
+        </tr>
       </tbody>
     </table>
   </div>
 
-  <h2>ショトログとは</h2>
+  <h2>コンテンツ</h2>
   <div class="card">
-    <p>
-      ショトログは、ショート動画(縦型動画)の運用代行・制作会社に特化した比較データベースです。
-      公開情報とヒアリングをもとに、料金レンジ・対応範囲・契約条件を統一フォーマットで整理しています。
-      掲載をご希望の企業様は<a href="/about/">運営者情報</a>のページからご連絡ください。
-    </p>
+    <ul>
+      <li><a href="/guide/">義務化ガイド</a> — 施行日・対象・「講ずべき措置」の中身を整理</li>
+      <li><a href="/templates/">ひな形・文例集</a> — 基本方針、店頭掲示、対応フローをそのまま使える形で</li>
+      <li><a href="/services/">対策サービス比較</a> — 研修 / 外部相談窓口 / ツール / コンサル・士業を横断比較</li>
+      <li><a href="/industry/">業種別の要点</a> — 小売・飲食・介護・コールセンター等の対応ポイント</li>
+    </ul>
   </div>
 
   <script>
-    const filter = document.getElementById('platform-filter') as HTMLSelectElement;
-    const rows = document.querySelectorAll<HTMLTableRowElement>('#agency-table tbody tr');
-    filter?.addEventListener('change', () => {
-      const v = filter.value;
-      rows.forEach((row) => {
-        const list = (row.dataset.platforms ?? '').split(',');
-        row.style.display = !v || list.includes(v) ? '' : 'none';
-      });
-    });
+    const el = document.getElementById('days-left');
+    if (el) {
+      const deadline = new Date('2026-10-01T00:00:00+09:00').getTime();
+      const days = Math.ceil((deadline - Date.now()) / 86400000);
+      el.textContent = days > 0 ? `あと${days}日` : '施行済みです — 対応がまだの企業は早急に体制整備を';
+    }
   </script>
 </Base>

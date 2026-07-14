@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import services from '../../data/services.json';
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+---
+<Base
+  title={`${service.name}の料金・サービス内容|カスハラ対策ナビ`}
+  description={`カスハラ対策サービス「${service.name}」(${service.category})の料金・特徴を紹介。${service.strengths}`}
+>
+  <p><a href="/services/">← サービス比較一覧に戻る</a></p>
+  <h1>{service.name}</h1>
+  <p><span class="tag">{service.category}</span></p>
+
+  <div class="card">
+    <p>{service.description}</p>
+  </div>
+
+  <h2>基本情報</h2>
+  <div class="table-scroll">
+    <table>
+      <tbody>
+        <tr><th>カテゴリ</th><td>{service.category}</td></tr>
+        <tr><th>料金目安</th><td>{service.priceNote}</td></tr>
+        <tr><th>向いている企業</th><td>{service.target}</td></tr>
+        <tr><th>主な機能・内容</th><td>{service.features.join(' / ')}</td></tr>
+        <tr><th>公式サイト</th><td><a href={service.url} rel="nofollow noopener" target="_blank">{service.url}</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>検討時のポイント</h2>
+  <div class="card">
+    <p>
+      {service.category}を導入する際は、義務化で求められる措置(<a href="/guide/">義務化ガイド</a>)のどこを埋めるものかを明確にして比較しましょう。
+      あわせて<a href="/templates/">基本方針のひな形</a>で内製できる部分を先に済ませておくと、外部費用を最小限に抑えられます。
+    </p>
+  </div>
+</Base>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shotolog.example.com/sitemap-index.xml
+Sitemap: https://kasuhara-navi.example.com/sitemap-index.xml

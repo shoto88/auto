@@ -14,13 +14,14 @@ const { title, description } = Astro.props;
     <link rel="sitemap" href="/sitemap-index.xml" />
     <style is:global>
       :root {
-        --ink: #1a1f2e;
+        --ink: #1c2130;
         --muted: #5c667a;
         --line: #e3e7ef;
         --bg: #f7f8fb;
         --card: #ffffff;
-        --accent: #0f6fde;
-        --accent-soft: #e8f1fd;
+        --accent: #c2410c;
+        --accent-soft: #fdeee4;
+        --safe: #0f766e;
       }
       * { box-sizing: border-box; }
       body {
@@ -28,118 +29,101 @@ const { title, description } = Astro.props;
         font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
         color: var(--ink);
         background: var(--bg);
-        line-height: 1.75;
+        line-height: 1.8;
       }
       a { color: var(--accent); }
       .wrap { max-width: 960px; margin: 0 auto; padding: 0 1rem; }
-      header.site {
-        background: var(--card);
-        border-bottom: 1px solid var(--line);
-      }
+      header.site { background: var(--card); border-bottom: 1px solid var(--line); }
       header.site .wrap {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
-        flex-wrap: wrap;
-        gap: 0.5rem;
+        display: flex; align-items: center; justify-content: space-between;
+        padding-top: 0.75rem; padding-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;
       }
-      .logo { font-weight: 800; font-size: 1.2rem; color: var(--ink); text-decoration: none; }
+      .logo { font-weight: 800; font-size: 1.15rem; color: var(--ink); text-decoration: none; }
       .logo span { color: var(--accent); }
-      nav.global a { margin-left: 1rem; font-size: 0.92rem; text-decoration: none; color: var(--muted); }
+      nav.global a { margin-left: 0.9rem; font-size: 0.9rem; text-decoration: none; color: var(--muted); }
       nav.global a:hover { color: var(--accent); }
       main { padding: 2rem 0 3rem; }
       .notice {
-        background: #fff7e0;
-        border: 1px solid #eddfa8;
-        color: #6b5b13;
-        font-size: 0.85rem;
-        border-radius: 8px;
-        padding: 0.6rem 0.9rem;
-        margin-bottom: 1.5rem;
+        background: #fff7e0; border: 1px solid #eddfa8; color: #6b5b13;
+        font-size: 0.85rem; border-radius: 8px; padding: 0.6rem 0.9rem; margin-bottom: 1.5rem;
       }
-      .card {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        padding: 1.25rem 1.5rem;
+      .disclaimer {
+        background: var(--card); border: 1px dashed var(--line); color: var(--muted);
+        font-size: 0.8rem; border-radius: 8px; padding: 0.6rem 0.9rem; margin-top: 2rem;
       }
-      h1 { font-size: 1.6rem; line-height: 1.4; }
+      .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem 1.5rem; }
+      .countdown {
+        background: var(--accent); color: #fff; border-radius: 12px;
+        padding: 0.8rem 1.5rem; font-weight: 700; margin-bottom: 1.5rem;
+      }
+      h1 { font-size: 1.55rem; line-height: 1.45; }
       h2 { font-size: 1.25rem; margin-top: 2.2rem; border-left: 4px solid var(--accent); padding-left: 0.6rem; }
+      h3 { font-size: 1.05rem; margin-top: 1.6rem; }
       .table-scroll { overflow-x: auto; }
       table { border-collapse: collapse; width: 100%; background: var(--card); font-size: 0.9rem; }
       th, td { border: 1px solid var(--line); padding: 0.6rem 0.7rem; text-align: left; vertical-align: top; }
       th { background: var(--accent-soft); white-space: nowrap; }
       .tag {
-        display: inline-block;
-        background: var(--accent-soft);
-        color: var(--accent);
-        border-radius: 999px;
-        font-size: 0.75rem;
-        padding: 0.1rem 0.6rem;
-        margin: 0 0.25rem 0.25rem 0;
-        white-space: nowrap;
+        display: inline-block; background: var(--accent-soft); color: var(--accent);
+        border-radius: 999px; font-size: 0.75rem; padding: 0.1rem 0.6rem;
+        margin: 0 0.25rem 0.25rem 0; white-space: nowrap;
       }
       .btn {
-        display: inline-block;
-        background: var(--accent);
-        color: #fff;
-        text-decoration: none;
-        border-radius: 8px;
-        padding: 0.6rem 1.2rem;
-        font-weight: 700;
+        display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
+        border-radius: 8px; padding: 0.6rem 1.2rem; font-weight: 700;
       }
       .btn:hover { opacity: 0.9; }
+      .btn.secondary { background: var(--safe); }
+      blockquote.template {
+        background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--safe);
+        margin: 1rem 0; padding: 1rem 1.3rem; border-radius: 0 8px 8px 0; font-size: 0.92rem;
+      }
       footer.site {
-        border-top: 1px solid var(--line);
-        background: var(--card);
-        color: var(--muted);
-        font-size: 0.85rem;
-        padding: 1.5rem 0 2rem;
+        border-top: 1px solid var(--line); background: var(--card); color: var(--muted);
+        font-size: 0.85rem; padding: 1.5rem 0 2rem;
       }
       footer.site a { color: var(--muted); margin-right: 1rem; }
       @media (prefers-color-scheme: dark) {
         :root {
-          --ink: #e8ebf2;
-          --muted: #9aa4b8;
-          --line: #2c3446;
-          --bg: #12151d;
-          --card: #1a1f2b;
-          --accent: #5aa2f0;
-          --accent-soft: #1e2c42;
+          --ink: #e8ebf2; --muted: #9aa4b8; --line: #2c3446; --bg: #12151d;
+          --card: #1a1f2b; --accent: #f0824a; --accent-soft: #33231a; --safe: #2dd4bf;
         }
         .notice { background: #2e2a17; border-color: #4d4520; color: #d8c877; }
+        .countdown { color: #12151d; }
       }
     </style>
   </head>
   <body>
     <header class="site">
       <div class="wrap">
-        <a class="logo" href="/">ショト<span>ログ</span></a>
+        <a class="logo" href="/">カスハラ対策<span>ナビ</span></a>
         <nav class="global">
-          <a href="/">運用代行を探す</a>
-          <a href="/guide/">料金相場ガイド</a>
+          <a href="/guide/">義務化ガイド</a>
+          <a href="/templates/">ひな形・文例集</a>
+          <a href="/services/">対策サービス比較</a>
+          <a href="/industry/">業種別の要点</a>
           <a href="/about/">運営者情報</a>
         </nav>
       </div>
     </header>
     <main>
       <div class="wrap">
-        <div class="notice">
-          ⚠️ 現在掲載中の企業情報はすべて<strong>サンプルデータ</strong>です。実在の企業とは関係ありません。正式リリースに向けてデータを整備中です。
-        </div>
         <slot />
+        <div class="disclaimer">
+          本サイトの情報は一般的な情報提供を目的としたものであり、法的助言ではありません。個別の対応については社会保険労務士・弁護士等の専門家にご相談ください。制度の内容は厚生労働省の指針・公表資料をもとに作成していますが、最新情報は必ず公的機関の一次情報をご確認ください。
+        </div>
       </div>
     </main>
     <footer class="site">
       <div class="wrap">
         <p>
-          <a href="/">ショトログ</a>
-          <a href="/guide/">料金相場ガイド</a>
+          <a href="/guide/">義務化ガイド</a>
+          <a href="/templates/">ひな形・文例集</a>
+          <a href="/services/">対策サービス比較</a>
+          <a href="/industry/">業種別の要点</a>
           <a href="/about/">運営者情報</a>
         </p>
-        <p>© 2026 ショトログ — ショート動画運用代行の比較データベース</p>
+        <p>© 2026 カスハラ対策ナビ — カスタマーハラスメント対策の情報・比較サイト</p>
       </div>
     </footer>
   </body>

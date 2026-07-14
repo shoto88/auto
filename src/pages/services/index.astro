@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+import services from '../../data/services.json';
+
+const categories = [...new Set(services.map((s) => s.category))];
+---
+<Base
+  title="カスハラ対策サービス比較|研修・外部相談窓口・ツール・コンサルを横断比較"
+  description="カスタマーハラスメント対策の外部サービス(研修会社・外部相談窓口・録音/通報ツール・コンサル/士業)を料金と対応範囲で横断比較。2026年10月の義務化対応に。"
+>
+  <p><a href="/">← トップに戻る</a></p>
+  <h1>カスハラ対策サービスを比較する</h1>
+  <div class="notice">
+    ⚠️ 現在掲載中のサービス情報はすべて<strong>サンプルデータ</strong>です。実在の企業・サービスとは関係ありません。正式リリースに向けてデータを整備中です。
+  </div>
+  <p>
+    義務化対応は「全部を外注する」必要はありません。<strong>方針づくりはひな形で内製し、相談窓口や研修など体制が必要な部分だけ外部サービスを使う</strong>のが、コストを抑える基本形です。
+  </p>
+
+  <p>
+    カテゴリで絞り込み:
+    <select id="category-filter">
+      <option value="">すべて</option>
+      {categories.map((c) => <option value={c}>{c}</option>)}
+    </select>
+  </p>
+
+  <div class="table-scroll">
+    <table id="service-table">
+      <thead>
+        <tr>
+          <th>サービス</th>
+          <th>カテゴリ</th>
+          <th>料金目安</th>
+          <th>向いている企業</th>
+          <th>強み</th>
+        </tr>
+      </thead>
+      <tbody>
+        {services.map((s) => (
+          <tr data-category={s.category}>
+            <td><a href={`/services/${s.slug}/`}>{s.name}</a></td>
+            <td><span class="tag">{s.category}</span></td>
+            <td>{s.priceNote}</td>
+            <td>{s.target}</td>
+            <td>{s.strengths}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>カテゴリ別の選び方</h2>
+  <div class="card">
+    <ul>
+      <li><strong>研修</strong> — 「周知・啓発」の義務対応と現場力の底上げ。全社一斉ならeラーニング、現場対応力なら集合研修</li>
+      <li><strong>外部相談窓口</strong> — 「相談体制の整備」を自社で人を置かずに満たせる。月額3万円程度から</li>
+      <li><strong>ツール</strong> — 通話録音・ウェアラブル通報など。抑止効果と証拠保全を両立できる</li>
+      <li><strong>コンサル・士業</strong> — 方針・規程・マニュアルまで一式任せたい場合や、悪質案件の法的対応が必要な場合</li>
+    </ul>
+  </div>
+
+  <script>
+    const filter = document.getElementById('category-filter') as HTMLSelectElement;
+    const rows = document.querySelectorAll<HTMLTableRowElement>('#service-table tbody tr');
+    filter?.addEventListener('change', () => {
+      const v = filter.value;
+      rows.forEach((row) => {
+        row.style.display = !v || row.dataset.category === v ? '' : 'none';
+      });
+    });
+  </script>
+</Base>
