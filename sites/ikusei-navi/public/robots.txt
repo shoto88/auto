@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ikusei-navi.example.com/sitemap-index.xml

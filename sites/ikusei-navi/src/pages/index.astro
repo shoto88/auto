@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="育成就労ナビ|2027年4月施行・育成就労制度と監理支援機関の情報サイト"
+  description="技能実習に代わる育成就労制度(2027年4月施行)の企業向け情報サイト。制度の変更点、受け入れ費用の相場、監理支援機関の選び方、許可スケジュールをわかりやすく解説します。"
+>
+  <div class="countdown" id="countdown">
+    育成就労制度の施行(2027年4月1日)まで <span id="days-left">…</span>
+  </div>
+
+  <section class="card">
+    <h1>技能実習が終わり、「育成就労」が始まる — 受け入れ企業の準備ガイド</h1>
+    <p>
+      2027年4月1日、技能実習制度が<strong>育成就労制度</strong>に生まれ変わります。
+      外国人材を受け入れている(これから受け入れる)企業にとって最大の変化は、
+      <strong>パートナーとなる監理団体が「監理支援機関」として全て許可を取り直す</strong>こと。
+      つまり全国の受け入れ企業が、組む相手を選び直すタイミングを迎えます。
+    </p>
+    <p>
+      <a class="btn" href="/guide/">何が変わるかを知る →</a>
+      <a class="btn" href="/choose/" style="margin-left:0.5rem">監理支援機関の選び方 →</a>
+    </p>
+  </section>
+
+  <h2>重要スケジュール</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>時期</th><th>何が起きるか</th><th>企業がやること</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2026年4月15日〜</td>
+          <td>監理支援機関の許可申請(施行日前申請)受付開始</td>
+          <td>今組んでいる監理団体に「移行申請するか」を確認</td>
+        </tr>
+        <tr>
+          <td>2026年9月1日〜</td>
+          <td>育成就労計画の認定申請(施行日前申請)受付開始</td>
+          <td>新規・継続受け入れの計画を監理支援機関と準備</td>
+        </tr>
+        <tr>
+          <td>2027年4月1日</td>
+          <td><strong>育成就労制度 施行</strong></td>
+          <td>新制度での受け入れ開始。旧制度の実習生は経過措置で継続</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>コンテンツ</h2>
+  <div class="card">
+    <ul>
+      <li><a href="/guide/">制度ガイド</a> — 技能実習との違い(転籍・キャリアパス・特定技能への接続)を整理</li>
+      <li><a href="/cost/">費用相場</a> — 監理費(月3〜5万円/人)ほか、受け入れコストの全体像</li>
+      <li><a href="/choose/">監理支援機関の選び方</a> — 移行期に「選び直す」ためのチェックリスト</li>
+      <li><a href="/db/">監理支援機関DB</a> — 許可一覧の公表状況と公式の探し方</li>
+    </ul>
+  </div>
+
+  <script>
+    const el = document.getElementById('days-left');
+    if (el) {
+      const deadline = new Date('2027-04-01T00:00:00+09:00').getTime();
+      const days = Math.ceil((deadline - Date.now()) / 86400000);
+      el.textContent = days > 0 ? `あと${days}日` : '施行されました';
+    }
+  </script>
+</Base>

@@ -1,15 +1,15 @@
 {
-  "name": "shotolog",
-  "type": "module",
-  "version": "0.1.0",
+  "name": "media-portfolio",
   "private": true,
+  "type": "module",
+  "workspaces": ["sites/*"],
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
-  },
-  "dependencies": {
-    "astro": "^5.1.0",
-    "@astrojs/sitemap": "^3.2.0"
+    "build": "npm run build --workspaces",
+    "build:kasuhara": "npm run build -w kasuhara-navi",
+    "build:pet": "npm run build -w pet-hotel-guide",
+    "build:ikusei": "npm run build -w ikusei-navi",
+    "dev:kasuhara": "npm run dev -w kasuhara-navi",
+    "dev:pet": "npm run dev -w pet-hotel-guide",
+    "dev:ikusei": "npm run dev -w ikusei-navi"
   }
 }

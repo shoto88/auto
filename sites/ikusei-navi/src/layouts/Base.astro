@@ -1,0 +1,119 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <style is:global>
+      :root {
+        --ink: #1e2338;
+        --muted: #5d6480;
+        --line: #e2e5f0;
+        --bg: #f7f8fc;
+        --card: #ffffff;
+        --accent: #4338ca;
+        --accent-soft: #e9e7fb;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        line-height: 1.8;
+      }
+      a { color: var(--accent); }
+      .wrap { max-width: 960px; margin: 0 auto; padding: 0 1rem; }
+      header.site { background: var(--card); border-bottom: 1px solid var(--line); }
+      header.site .wrap {
+        display: flex; align-items: center; justify-content: space-between;
+        padding-top: 0.75rem; padding-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;
+      }
+      .logo { font-weight: 800; font-size: 1.15rem; color: var(--ink); text-decoration: none; }
+      .logo span { color: var(--accent); }
+      nav.global a { margin-left: 0.9rem; font-size: 0.9rem; text-decoration: none; color: var(--muted); }
+      nav.global a:hover { color: var(--accent); }
+      main { padding: 2rem 0 3rem; }
+      .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem 1.5rem; }
+      .notice {
+        background: #fff7e0; border: 1px solid #eddfa8; color: #6b5b13;
+        font-size: 0.85rem; border-radius: 8px; padding: 0.6rem 0.9rem; margin-bottom: 1.5rem;
+      }
+      .disclaimer {
+        background: var(--card); border: 1px dashed var(--line); color: var(--muted);
+        font-size: 0.8rem; border-radius: 8px; padding: 0.6rem 0.9rem; margin-top: 2rem;
+      }
+      .countdown {
+        background: var(--accent); color: #fff; border-radius: 12px;
+        padding: 0.8rem 1.5rem; font-weight: 700; margin-bottom: 1.5rem;
+      }
+      h1 { font-size: 1.55rem; line-height: 1.45; }
+      h2 { font-size: 1.25rem; margin-top: 2.2rem; border-left: 4px solid var(--accent); padding-left: 0.6rem; }
+      h3 { font-size: 1.05rem; margin-top: 1.6rem; }
+      .table-scroll { overflow-x: auto; }
+      table { border-collapse: collapse; width: 100%; background: var(--card); font-size: 0.9rem; }
+      th, td { border: 1px solid var(--line); padding: 0.6rem 0.7rem; text-align: left; vertical-align: top; }
+      th { background: var(--accent-soft); white-space: nowrap; }
+      .btn {
+        display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
+        border-radius: 8px; padding: 0.6rem 1.2rem; font-weight: 700;
+      }
+      .btn:hover { opacity: 0.9; }
+      footer.site {
+        border-top: 1px solid var(--line); background: var(--card); color: var(--muted);
+        font-size: 0.85rem; padding: 1.5rem 0 2rem;
+      }
+      footer.site a { color: var(--muted); margin-right: 1rem; }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e8eaf4; --muted: #9aa1bd; --line: #2c3049; --bg: #121522;
+          --card: #1a1e30; --accent: #8b83f0; --accent-soft: #232042;
+        }
+        .notice { background: #2e2a17; border-color: #4d4520; color: #d8c877; }
+        .countdown { color: #121522; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <a class="logo" href="/">育成就労<span>ナビ</span></a>
+        <nav class="global">
+          <a href="/guide/">制度ガイド</a>
+          <a href="/cost/">費用相場</a>
+          <a href="/choose/">監理支援機関の選び方</a>
+          <a href="/db/">監理支援機関DB</a>
+          <a href="/about/">運営者情報</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="wrap">
+        <slot />
+        <div class="disclaimer">
+          本サイトの情報は一般的な情報提供を目的としたものであり、法的助言ではありません。制度の内容は出入国在留管理庁・厚生労働省・外国人技能実習機構(OTIT)の公表資料をもとに作成していますが、施行前の制度のため詳細は変更される可能性があります。最新情報は必ず公的機関の一次情報をご確認ください。
+        </div>
+      </div>
+    </main>
+    <footer class="site">
+      <div class="wrap">
+        <p>
+          <a href="/guide/">制度ガイド</a>
+          <a href="/cost/">費用相場</a>
+          <a href="/choose/">監理支援機関の選び方</a>
+          <a href="/db/">監理支援機関DB</a>
+          <a href="/about/">運営者情報</a>
+        </p>
+        <p>© 2026 育成就労ナビ — 育成就労制度と監理支援機関の情報サイト</p>
+      </div>
+    </footer>
+  </body>
+</html>
